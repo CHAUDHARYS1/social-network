@@ -1,7 +1,33 @@
 const {
     Schema,
-    model
+    model,
+    Types
 } = require('mongoose');
+
+const ReactionSchema = new Schema({
+    reactionId: {
+        type: Schema.Types.ObjectId,
+        default: () => new Types.ObjectId()
+    },
+    reactionBody: {
+        type: String, 
+        required: true, 
+        // TODO: 280 character maximum 
+    },
+    username: {
+        type: String, 
+        required: true
+    },
+    createdAt: {
+        type: Date,
+        default: Date.now 
+        // TODO: User a getter method to format the timestamp on query
+    }
+}, {
+    toJSON: {
+        getters: true
+    }
+})
 
 const ThoughtSchema = new Schema({
     thoughtText: {
