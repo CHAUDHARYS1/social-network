@@ -1,38 +1,42 @@
-const { Schema, model } = require('mongoose');
+// TODO: 1 requirement
+
+const {
+    Schema,
+    model
+} = require('mongoose');
 
 const UserSchema = new Schema({
-    username:{
-        type: String, 
-        unique: true, 
-        required: true, 
-        trim: true 
+    username: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true
     },
     email: {
-        type: String, 
-        unique: true, 
+        type: String,
+        unique: true,
         required: true
         // TODO: Need to add email validation
     },
     thoughts: [{
         ref: 'Thoughts'
     }],
-    friends: [{ 
+    friends: [{
         ref: 'Friends'
     }]
-},
-{
+}, {
     toJSON: {
-        virtuals: true, 
+        virtuals: true,
         getters: true
-    }, 
+    },
     id: false
 });
 
 // TODO: Create a virtual called `friendCount` that retrieves the length of the user's friends array field on query.
 
-// UserSchema.virtuals('friendCount').get(function(){ 
-    // return this.friends.reduce((total, friend) => total + friend.)    
-// });
+UserSchema.virtuals('friendCount').get(function () {
+    return this.friends.length;
+});
 
 
 // * Example from previous project * //
@@ -40,6 +44,11 @@ const UserSchema = new Schema({
 //    return this.comments.reduce((total, comment) => total + comment.replies.length + 1, 0);
 //  });
 
-// create the pizza model using the pizzaSchema
+// * Example from previous project * //
+// ThoughtSchema.virtual('reactionCount').get(function () {
+//    return this.reactions.length;
+// });
+
+
 const User = model('User', UserSchema);
 module.exports = User;

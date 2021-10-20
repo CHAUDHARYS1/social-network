@@ -1,3 +1,5 @@
+// TODO: 3 requirements
+
 const {
     Schema,
     model,
@@ -10,17 +12,17 @@ const ReactionSchema = new Schema({
         default: () => new Types.ObjectId()
     },
     reactionBody: {
-        type: String, 
-        required: true, 
-        // TODO: 280 character maximum 
+        type: String,
+        required: true,
+        maxlength: 280
     },
     username: {
-        type: String, 
+        type: String,
         required: true
     },
     createdAt: {
         type: Date,
-        default: Date.now 
+        default: Date.now
         // TODO: User a getter method to format the timestamp on query
     }
 }, {
@@ -38,6 +40,7 @@ const ThoughtSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
+        // TODO: User a getter method to format the timestamp on query
     },
     username: {
         type: String,
