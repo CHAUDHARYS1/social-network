@@ -1,4 +1,4 @@
-// TODO: 2 requirement
+// TODO: 1 requirement
 
 const {
     Schema,
@@ -15,12 +15,13 @@ const UserSchema = new Schema({
     email: {
         type: String,
         unique: true,
-        required: true
+        required: true,
         // TODO: Need to add email validation
+        match: [/.+@.+\..+/, 'Must match an email address!']
     },
-    thoughts: [{
-        ref: 'Thoughts'
-    }],
+    // thoughts: [{
+    //     ref: 'Thought'
+    // }],
     friends: [{
         ref: 'Friends'
     }]
