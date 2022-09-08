@@ -19,12 +19,14 @@ const UserSchema = new Schema({
         // TODO: Need to add email validation
         match: [/.+@.+\..+/, 'Must match an email address!']
     },
-    // thoughts: [{
-    //     ref: 'Thought'
-    // }],
+    thoughts: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Thought',
+    }, ],
     friends: [{
-        ref: 'Friends'
-    }]
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+    }, ],
 }, {
     toJSON: {
         virtuals: true,
@@ -35,7 +37,7 @@ const UserSchema = new Schema({
 
 // TODO: Create a virtual called `friendCount` that retrieves the length of the user's friends array field on query.
 
-UserSchema.virtuals('friendCount').get(function () {
+UserSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 });
 
